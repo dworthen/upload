@@ -1,0 +1,19 @@
+{
+  "name": "bb-upload-3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.15.3",
+    "bluebird": "^3.4.7",
+    "co": "^4.6.0",
+    "commander": "^2.9.0",
+    "promptly": "^2.1.0",
+    "yargs": "^6.6.0"
+  }
+}
