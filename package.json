@@ -11,9 +11,11 @@
   "dependencies": {
     "axios": "^0.15.3",
     "bluebird": "^3.4.7",
+    "bluebird-retry": "^0.10.1",
     "co": "^4.6.0",
     "commander": "^2.9.0",
     "promptly": "^2.1.0",
+    "ramda": "^0.23.0",
     "yargs": "^6.6.0"
   }
 }
