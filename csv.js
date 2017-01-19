@@ -38,6 +38,7 @@ var courseXMLParser = mo.xmlParser({
 var responseXMLParser = mo.xmlParser({
     "completedCount": "completedCount",
     "errorCount": "errorCount",
+    "warningCount": "warningCount",
     "queuedCount": "queuedCount"
 });
 
@@ -96,12 +97,13 @@ mo.task('CSV:ADD-CourseSection-CSV', function() {
         if(cli.verbose) {
             mo.log({
                 path: ['meta', 'path'],
+                courseID: ['parsed', 'course_id'],
                 lineNumber: ['data', 'lineNumber'],
                 // parsed: ['parsed'],
                 // postBody: ['postBody'],
-                uploadStatus: ['courseStore', 'response', 'statusText'],
-                referenceCode: ['courseStore', 'response', 'data'],
-                status: ['dataSetStatus', 'response', 'data'],
+                uploadStatus: ['courseStore', 'statusText'],
+                referenceCode: ['courseStore', 'data'],
+                status: ['dataSetStatus', 'data'],
                 processingTime: ['processingTime']
             })(newTransaction);
         }
@@ -123,12 +125,12 @@ mo.task('CSV:ADD-CourseSection-CSV', function() {
         data: ['postBody']
     }))
     .pipe(transaction => {
-        transaction.courseStore.response.data = transaction.courseStore.response.data.replace(/.*?code\s([^\s]*)(.|\s)*/i, '$1');
+        transaction.courseStore.data = transaction.courseStore.data.replace(/.*?code\s([^\s]*)(.|\s)*/i, '$1');
         return transaction;
     })
     .pipe(http({
         name: 'dataSetStatus',
-        url: t => `/webapps/bb-data-integration-flatfile-BBLEARN/endpoint/dataSetStatus/${t.courseStore.response.data}`,
+        url: t => `/webapps/bb-data-integration-flatfile-BBLEARN/endpoint/dataSetStatus/${t.courseStore.data}`,
         method: 'get',
         transformResponse: [function(data) {
             let newData = responseXMLParser()({lineNumber: 0, message: data});

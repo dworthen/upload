@@ -29,7 +29,7 @@ module.exports = function(globalOptions) {
             function call() {
                 return axios.request(options)
                     .then(res => {
-                        transaction[options.name].response = res;
+                        transaction[options.name] = res;
                         return transaction;
                     });
             }

@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<SOAP-ENV:Envelope xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+    <SOAP-ENV:Header>
+        <imsx_syncRequestHeaderInfo xmlns="http://www.imsglobal.org/services/lis/cmsv1p0/wsdl11/sync/imscms_v1p0">
+            <imsx_version>V2.0</imsx_version>
+            <imsx_messageIdentifier />
+        </imsx_syncRequestHeaderInfo>
+    </SOAP-ENV:Header>
+    <SOAP-ENV:Body>
+        <<%- locals.Operation ? Operation.value : '' %>Request xmlns:cms="http://www.imsglobal.org/services/lis/cmsv1p0/wsdl11/sync/imscms_v1p0">
+            <sourcedId><%- locals.external_course_key ? external_course_key : '' %></sourcedId>
+            <cms:courseSectionRecord xmlns:cms="http://www.imsglobal.org/services/lis/cmsv1p0/wsdl11/sync/imscms_v1p0">
+                <cms:sourcedGUID>
+                    <cms:refAgentInstanceID>CS</cms:refAgentInstanceID>
+                    <cms:sourcedId><%- locals.external_course_key ? external_course_key : '' %></cms:sourcedId>
+                </cms:sourcedGUID>
+                <cms:courseSection>
+                    <cms:label>
+                        <cms:language>en-US</cms:language>
+                        <cms:textString><%- locals.course_id ? course_id : '' %></cms:textString>
+                    </cms:label>
+                    <cms:title>
+                        <cms:language>en-US</cms:language>
+                        <cms:textString><%- locals.course_name ? course_name : '' %></cms:textString>
+                    </cms:title>
+                    <cms:parentOfferingId></cms:parentOfferingId>
+                    <cms:catalogDescription>
+                        <cms:shortDescription>
+                            <cms:language>en-US</cms:language>
+                            <cms:textString></cms:textString>
+                        </cms:shortDescription>
+                        <cms:longDescription>
+                            <cms:language>en-US</cms:language>
+                            <cms:textString></cms:textString>
+                        </cms:longDescription>
+                    </cms:catalogDescription>
+                    <cms:status>
+                        <% if (locals.row_status) { %>
+                            <%- row_status %>
+                        <% } else { %>
+                            Active
+                        <% } %>
+                    </cms:status>
+                    <cms:category>
+                        <cms:language>en-US</cms:language>
+                        <cms:textString>LEC</cms:textString>
+                    </cms:category>
+                    <cms:maxNumberofStudents>0</cms:maxNumberofStudents>
+                    <cms:numberofStudents>0</cms:numberofStudents>
+                    <cms:academicSession>
+                        <cms:language>en-US</cms:language>
+                        <cms:textString>
+                        </cms:textString>
+                    </cms:academicSession>
+                    <cms:org>
+                        <cms:orgName>
+                            <cms:language>en-US</cms:language>
+                            <cms:textString>
+                            </cms:textString>
+                        </cms:orgName>
+                    </cms:org>
+                    <cms:timeFrame>
+                        <% if (locals.start_date && locals.end_date) { %>
+                            <cms:begin><%- start_date %></cms:begin>
+                            <cms:end><%- end_date %></cms:end>
+                        <% } %>
+                    </cms:timeFrame>
+                    <cms:location>
+                        <cms:language>en-US</cms:language>
+                        <cms:textString>;</cms:textString>
+                    </cms:location>
+                    <cms:notes>
+                        <cms:language>en-US</cms:language>
+                        <cms:textString>* </cms:textString>
+                    </cms:notes>
+                    <cms:meeting>
+                        <cms:language>en-US</cms:language>
+                        <cms:textString></cms:textString>
+                    </cms:meeting>
+                    <cms:dataSource>CS</cms:dataSource>
+                    <cms:extension>
+                        <cms:extensionNameVocabulary/>
+                        <cms:extensionTypeVocabulary>http://www.imsglobal.org/lis/cmsv1p0/extensionvocabularyv1p0</cms:extensionTypeVocabulary>
+                        <cms:extensionField>
+                            <cms:fieldName>Mode</cms:fieldName>
+                            <cms:fieldType>String</cms:fieldType>
+                            <cms:fieldValue>C</cms:fieldValue>
+                        </cms:extensionField>
+                    </cms:extension>
+                </cms:courseSection>
+            </cms:courseSectionRecord>
+        </<%- locals.Operation ? Operation.value : '' %>Request>
+    </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
